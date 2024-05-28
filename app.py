@@ -1,19 +1,29 @@
 from flask import Flask, render_template, request, redirect, url_for
-import json
+import sqlite3
 import os
 
 app = Flask(__name__)
 
-def read_data(file_name):
-    if not os.path.exists(file_name):
-        with open(file_name, 'w') as f:
-            json.dump([], f)
-    with open(file_name, 'r') as f:
-        return json.load(f)
+DATABASE = 'database.db'
 
-def write_data(file_name, data):
-    with open(file_name, 'w') as f:
-        json.dump(data, f, indent=2)
+def init_db():
+    with app.app_context():
+        db = get_db()
+        with app.open_resource('schema.sql', mode='r') as f:
+            db.cursor().executescript(f.read())
+        db.commit()
+
+def get_db():
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = sqlite3.connect(DATABASE)
+    return db
+
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, '_database', None)
+    if db is not None:
+        db.close()
 
 @app.route('/')
 def index():
@@ -22,7 +32,9 @@ def index():
 @app.route('/projects')
 def projects():
     try:
-        projects = read_data('projects.json')
+        db = get_db()
+        cur = db.execute('SELECT title, description, location, date FROM projects')
+        projects = cur.fetchall()
         return render_template('projects.html', projects=projects)
     except Exception as e:
         return str(e), 500
@@ -35,9 +47,10 @@ def new_project():
             description = request.form['description']
             location = request.form['location']
             date = request.form['date']
-            projects = read_data('projects.json')
-            projects.append({'title': title, 'description': description, 'location': location, 'date': date})
-            write_data('projects.json', projects)
+            db = get_db()
+            db.execute('INSERT INTO projects (title, description, location, date) VALUES (?, ?, ?, ?)',
+                       [title, description, location, date])
+            db.commit()
             return redirect(url_for('projects'))
         except Exception as e:
             return str(e), 500
@@ -46,7 +59,9 @@ def new_project():
 @app.route('/projects/reset', methods=['POST'])
 def reset_projects():
     try:
-        write_data('projects.json', [])
+        db = get_db()
+        db.execute('DELETE FROM projects')
+        db.commit()
         return redirect(url_for('projects'))
     except Exception as e:
         return str(e), 500
@@ -54,7 +69,9 @@ def reset_projects():
 @app.route('/volunteers')
 def volunteers():
     try:
-        volunteers = read_data('volunteers.json')
+        db = get_db()
+        cur = db.execute('SELECT title, description, location, date FROM volunteers')
+        volunteers = cur.fetchall()
         return render_template('volunteers.html', volunteers=volunteers)
     except Exception as e:
         return str(e), 500
@@ -67,9 +84,10 @@ def new_volunteer():
             description = request.form['description']
             location = request.form['location']
             date = request.form['date']
-            volunteers = read_data('volunteers.json')
-            volunteers.append({'title': title, 'description': description, 'location': location, 'date': date})
-            write_data('volunteers.json', volunteers)
+            db = get_db()
+            db.execute('INSERT INTO volunteers (title, description, location, date) VALUES (?, ?, ?, ?)',
+                       [title, description, location, date])
+            db.commit()
             return redirect(url_for('volunteers'))
         except Exception as e:
             return str(e), 500
@@ -78,10 +96,13 @@ def new_volunteer():
 @app.route('/volunteers/reset', methods=['POST'])
 def reset_volunteers():
     try:
-        write_data('volunteers.json', [])
+        db = get_db()
+        db.execute('DELETE FROM volunteers')
+        db.commit()
         return redirect(url_for('volunteers'))
     except Exception as e:
         return str(e), 500
 
 if __name__ == '__main__':
+    init_db()
     app.run(debug=True)
