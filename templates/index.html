@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Platformă Proiecte Ecologice</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header>
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="EcoHub Logo" class="logo">
+    <h1>Platformă Proiecte Ecologice</h1>
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('index') }}">Acasă</a></li>
+        <li><a href="{{ url_for('projects') }}">Proiecte</a></li>
+        <li><a href="{{ url_for('new_project') }}">Publică un Proiect</a></li>
+        <li><a href="{{ url_for('volunteers') }}">Voluntariat</a></li>
+        <li><a href="{{ url_for('new_volunteer') }}">Publică un Anunț de Voluntariat</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h2>Bine ați venit la EcoHub - Platforma pentru Proiecte Verzi</h2>
+    <p>La EcoHub, ne dedicăm să construim o platformă web și o aplicație mobilă care să stimuleze și să susțină activitățile ecologice. Scopul nostru este de a oferi publicului un loc accesibil unde ideile și proiectele menite să protejeze mediul pot fi găsite și promovate cu ușurință.</p>
+    <h3>Ce facem:</h3>
+    <p>Oricine poate publica un proiect pe EcoHub, având ca obiectiv principal protejarea mediului. Fie că ai nevoie de voluntari sau parteneri pentru a-ți transforma ideea în realitate, platforma noastră îți oferă suportul necesar pentru a atrage atenția și ajutorul de care ai nevoie.</p>
+    <h3>Exemple de proiecte ecologice:</h3>
+    <ul>
+      <li>Campanii de colectare și reciclare a deșeurilor în diverse comunități.</li>
+      <li>Activități de curățare a parcurilor și zonelor naturale de gunoaie și deșeuri.</li>
+      <li>Organizarea de evenimente pentru plantarea copacilor în parcuri, păduri și alte spații verzi.</li>
+      <li>Workshop-uri și evenimente educative despre importanța protecției mediului.</li>
+      <li>Campanii de conștientizare și promovare a utilizării surselor de energie regenerabilă.</li>
+      <li>Dezvoltarea de platforme și cursuri online pentru educația ecologică.</li>
+      <li>Construirea și instalarea de adăposturi pentru animalele sălbatice.</li>
+      <li>Proiecte pentru monitorizarea și reducerea poluării.</li>
+      <li>Crearea de piețe locale pentru produse ecologice și sustenabile.</li>
+      <li>Dezvoltarea infrastructurii turistice ecologice, cum ar fi trasee de drumeție și ciclism.</li>
+    </ul>
+    <h3>Funcționalitățile platformei noastre:</h3>
+    <ul>
+      <li><strong>Publicarea proiectelor:</strong> Oricine poate publica un proiect pe platformă, specificând detalii precum tipul activității, data și locul de desfășurare.</li>
+      <li><strong>Filtrarea și căutarea proiectelor:</strong> Utilizatorii pot căuta proiecte în funcție de parametrii aleși de aceștia.</li>
+      <li><strong>Voluntariat:</strong> Utilizatorii pot solicita participarea ca voluntar în proiectele care îi interesează.</li>
+      <li><strong>Feedback și evaluare:</strong> După desfășurarea proiectului, participanții pot da feedback organizatorului, contribuind astfel la îmbunătățirea experienței pentru viitor.</li>
+      <li><strong>Notificări:</strong> Utilizatorii pot opta să primească notificări despre proiectele noi și despre modificările proiectelor la care participă.</li>
+    </ul>
+    <h3>Beneficiile EcoHub:</h3>
+    <p>Prin aceste activități, nu doar că ajutăm natura, dar oferim și voluntarilor oportunități valoroase de a obține diplome și recunoaștere pentru implicarea lor. Alătură-te comunității EcoHub și contribuie activ la protejarea mediului înconjurător!</p>
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="EcoHub Logo" class="footer-image">
+  </main>
+  <footer>
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="EcoHub Logo" class="logo-footer">
+    <p>&copy; 2024 EcoHub. Toate drepturile rezervate.</p>
+  </footer>
+</body>
+</html>
