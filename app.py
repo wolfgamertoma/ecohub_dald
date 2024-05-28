@@ -4,7 +4,9 @@ import os
 
 app = Flask(__name__)
 
-DATABASE = 'database.db'
+# Definim calea absolută a fișierului de bază de date
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATABASE = os.path.join(BASE_DIR, 'database.db')
 
 def init_db():
     with app.app_context():
