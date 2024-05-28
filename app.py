@@ -21,49 +21,67 @@ def index():
 
 @app.route('/projects')
 def projects():
-    projects = read_data('projects.json')
-    return render_template('projects.html', projects=projects)
+    try:
+        projects = read_data('projects.json')
+        return render_template('projects.html', projects=projects)
+    except Exception as e:
+        return str(e), 500
 
 @app.route('/projects/new', methods=['GET', 'POST'])
 def new_project():
     if request.method == 'POST':
-        title = request.form['title']
-        description = request.form['description']
-        location = request.form['location']
-        date = request.form['date']
-        projects = read_data('projects.json')
-        projects.append({'title': title, 'description': description, 'location': location, 'date': date})
-        write_data('projects.json', projects)
-        return redirect(url_for('projects'))
+        try:
+            title = request.form['title']
+            description = request.form['description']
+            location = request.form['location']
+            date = request.form['date']
+            projects = read_data('projects.json')
+            projects.append({'title': title, 'description': description, 'location': location, 'date': date})
+            write_data('projects.json', projects)
+            return redirect(url_for('projects'))
+        except Exception as e:
+            return str(e), 500
     return render_template('new_project.html')
 
 @app.route('/projects/reset', methods=['POST'])
 def reset_projects():
-    write_data('projects.json', [])
-    return redirect(url_for('projects'))
+    try:
+        write_data('projects.json', [])
+        return redirect(url_for('projects'))
+    except Exception as e:
+        return str(e), 500
 
 @app.route('/volunteers')
 def volunteers():
-    volunteers = read_data('volunteers.json')
-    return render_template('volunteers.html', volunteers=volunteers)
+    try:
+        volunteers = read_data('volunteers.json')
+        return render_template('volunteers.html', volunteers=volunteers)
+    except Exception as e:
+        return str(e), 500
 
 @app.route('/volunteers/new', methods=['GET', 'POST'])
 def new_volunteer():
     if request.method == 'POST':
-        title = request.form['title']
-        description = request.form['description']
-        location = request.form['location']
-        date = request.form['date']
-        volunteers = read_data('volunteers.json')
-        volunteers.append({'title': title, 'description': description, 'location': location, 'date': date})
-        write_data('volunteers.json', volunteers)
-        return redirect(url_for('volunteers'))
+        try:
+            title = request.form['title']
+            description = request.form['description']
+            location = request.form['location']
+            date = request.form['date']
+            volunteers = read_data('volunteers.json')
+            volunteers.append({'title': title, 'description': description, 'location': location, 'date': date})
+            write_data('volunteers.json', volunteers)
+            return redirect(url_for('volunteers'))
+        except Exception as e:
+            return str(e), 500
     return render_template('new_volunteer.html')
 
 @app.route('/volunteers/reset', methods=['POST'])
 def reset_volunteers():
-    write_data('volunteers.json', [])
-    return redirect(url_for('volunteers'))
+    try:
+        write_data('volunteers.json', [])
+        return redirect(url_for('volunteers'))
+    except Exception as e:
+        return str(e), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
