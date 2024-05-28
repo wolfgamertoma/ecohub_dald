@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-# Definim calea absolută a fișierului de bază de date
+# Define the absolute path for the database file
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATABASE = os.path.join(BASE_DIR, 'database.db')
 
@@ -29,6 +29,9 @@ def close_connection(exception):
 
 @app.route('/')
 def index():
+    # Check if the database file exists
+    if not os.path.exists(DATABASE):
+        return "Database file does not exist"
     return render_template('index.html')
 
 @app.route('/projects')
@@ -106,5 +109,7 @@ def reset_volunteers():
         return str(e), 500
 
 if __name__ == '__main__':
+    # Print the path of the database file for debugging
+    print(f"Database path: {DATABASE}")
     init_db()
     app.run(debug=True)
