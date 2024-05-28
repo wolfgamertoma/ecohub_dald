@@ -24,9 +24,9 @@
     <ul>
       {% for volunteer in volunteers %}
         <li>
-          <h3>{{ volunteer.title }}</h3>
-          <p>{{ volunteer.description }}</p>
-          <p>{{ volunteer.location }} - {{ volunteer.date }}</p>
+          <h3>{{ volunteer[0] }}</h3>
+          <p>{{ volunteer[1] }}</p>
+          <p>{{ volunteer[2] }} - {{ volunteer[3] }}</p>
         </li>
       {% endfor %}
     </ul>
