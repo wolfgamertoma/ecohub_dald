@@ -8,8 +8,10 @@
 </head>
 <body>
   <header>
-    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="EcoHub Logo" class="logo">
-    <h1>Platformă Proiecte Ecologice</h1>
+    <div>
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="EcoHub Logo" class="logo">
+      <span>Platformă Proiecte Ecologice</span>
+    </div>
     <nav>
       <ul>
         <li><a href="{{ url_for('index') }}">Acasă</a></li>
@@ -51,7 +53,7 @@
     <img src="{{ url_for('static', filename='images/logo.png') }}" alt="EcoHub Logo" class="footer-image">
   </main>
   <footer>
-    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="EcoHub Logo" class="logo-footer">
+    <img src="{{ url_for('static', filename='images/image.png') }}" alt="EcoHub Logo" class="logo-footer">
     <p>&copy; 2024 EcoHub. Toate drepturile rezervate.</p>
   </footer>
 </body>
