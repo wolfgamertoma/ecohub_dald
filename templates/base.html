@@ -28,6 +28,12 @@
   <footer>
     <img src="{{ url_for('static', filename='images/logo.png') }}" alt="EcoHub Logo" class="logo-footer">
     <p>&copy; 2024 EcoHub. Toate drepturile rezervate.</p>
+    <form action="{{ url_for('reset_projects') }}" method="post" style="display:inline;">
+      <button type="submit">Reset Proiecte</button>
+    </form>
+    <form action="{{ url_for('reset_volunteers') }}" method="post" style="display:inline;">
+      <button type="submit">Reset Voluntari</button>
+    </form>
   </footer>
 </body>
 </html>
