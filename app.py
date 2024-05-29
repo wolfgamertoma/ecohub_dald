@@ -83,7 +83,7 @@ def volunteers():
 
 @app.route('/volunteers/new', methods=['GET', 'POST'])
 def new_volunteer():
-    if request.method == 'POST':
+    if request.method == 'POST'):
         try:
             title = request.form['title']
             description = request.form['description']
@@ -112,4 +112,5 @@ if __name__ == '__main__':
     # Print the path of the database file for debugging
     print(f"Database path: {DATABASE}")
     init_db()
-    app.run(debug=True)
+    from gunicorn.app.wsgiapp import run
+    run()
