@@ -110,6 +110,10 @@ def reset_volunteers():
     except Exception as e:
         return str(e), 500
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 if __name__ == '__main__':
     print(f"Database path: {DATABASE}")
     init_db()
