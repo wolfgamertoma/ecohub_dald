@@ -1,48 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Voluntariat</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-  <header>
-    <h1>Voluntariat</h1>
-    <nav>
-      <ul>
-        <li><a href="{{ url_for('index') }}">Acasă</a></li>
-        <li><a href="{{ url_for('projects') }}">Proiecte</a></li>
-        <li><a href="{{ url_for('new_project') }}">Publică un Proiect</a></li>
-        <li><a href="{{ url_for('volunteers') }}">Voluntariat</a></li>
-        <li><a href="{{ url_for('new_volunteer') }}">Publică un Anunț de Voluntariat</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    <h2>Anunțuri de Voluntariat</h2>
-    <ul>
-      {% for volunteer in volunteers %}
-        <li>
-          <h3>{{ volunteer[0] }}</h3>
-          <p>{{ volunteer[1] }}</p>
-          <p>{{ volunteer[2] }} - {{ volunteer[3] }}</p>
-        </li>
-      {% endfor %}
-    </ul>
-    {% if volunteers|length == 0 %}
-      <p>Nu există anunțuri de voluntariat disponibile.</p>
-    {% endif %}
-  </main>
-  <footer>
-    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="EcoHub Logo" class="logo-footer">
-    <p>&copy; 2024 EcoHub. Toate drepturile rezervate.</p>
-    <form action="{{ url_for('reset_projects') }}" method="post" style="display:inline;">
-      <button type="submit">Reset Proiecte</button>
-    </form>
-    <form action="{{ url_for('reset_volunteers') }}" method="post" style="display:inline;">
-      <button type="submit">Reset Voluntari</button>
-    </form>
-  </footer>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Voluntariat{% endblock %}
+
+{% block content %}
+<h2>Anunțuri de Voluntariat</h2>
+<ul>
+  {% for volunteer in volunteers %}
+    <li>
+      <h3>{{ volunteer[0] }}</h3>
+      <p>{{ volunteer[1] }}</p>
+      <p>{{ volunteer[2] }} - {{ volunteer[3] }}</p>
+    </li>
+  {% endfor %}
+</ul>
+{% if volunteers|length == 0 %}
+  <p>Nu există anunțuri de voluntariat disponibile.</p>
+{% endif %}
+{% endblock %}
