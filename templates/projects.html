@@ -1,48 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Proiecte</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-  <header>
-    <h1>Proiecte</h1>
-    <nav>
-      <ul>
-        <li><a href="{{ url_for('index') }}">Acasă</a></li>
-        <li><a href="{{ url_for('projects') }}">Proiecte</a></li>
-        <li><a href="{{ url_for('new_project') }}">Publică un Proiect</a></li>
-        <li><a href="{{ url_for('volunteers') }}">Voluntariat</a></li>
-        <li><a href="{{ url_for('new_volunteer') }}">Publică un Anunț de Voluntariat</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    <h2>Proiecte</h2>
-    <ul>
-      {% for project in projects %}
-        <li>
-          <h3>{{ project[0] }}</h3>
-          <p>{{ project[1] }}</p>
-          <p>{{ project[2] }} - {{ project[3] }}</p>
-        </li>
-      {% endfor %}
-    </ul>
-    {% if projects|length == 0 %}
-      <p>Nu există proiecte disponibile.</p>
-    {% endif %}
-  </main>
-  <footer>
-    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="EcoHub Logo" class="logo-footer">
-    <p>&copy; 2024 EcoHub. Toate drepturile rezervate.</p>
-    <form action="{{ url_for('reset_projects') }}" method="post" style="display:inline;">
-      <button type="submit">Reset Proiecte</button>
-    </form>
-    <form action="{{ url_for('reset_volunteers') }}" method="post" style="display:inline;">
-      <button type="submit">Reset Voluntari</button>
-    </form>
-  </footer>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Proiecte{% endblock %}
+
+{% block content %}
+<h2>Proiecte</h2>
+<ul>
+  {% for project in projects %}
+    <li>
+      <h3>{{ project[0] }}</h3>
+      <p>{{ project[1] }}</p>
+      <p>{{ project[2] }} - {{ project[3] }}</p>
+    </li>
+  {% endfor %}
+</ul>
+{% if projects|length == 0 %}
+  <p>Nu există proiecte disponibile.</p>
+{% endif %}
+{% endblock %}

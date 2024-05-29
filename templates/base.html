@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock %} - EcoHub</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header>
+    <div>
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="EcoHub Logo" class="logo">
+      <span>Platformă Proiecte Ecologice</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('index') }}">Acasă</a></li>
+        <li><a href="{{ url_for('projects') }}">Proiecte</a></li>
+        <li><a href="{{ url_for('new_project') }}">Publică un Proiect</a></li>
+        <li><a href="{{ url_for('volunteers') }}">Voluntariat</a></li>
+        <li><a href="{{ url_for('new_volunteer') }}">Publică un Anunț de Voluntariat</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  <footer>
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="EcoHub Logo" class="logo-footer">
+    <p>&copy; 2024 EcoHub. Toate drepturile rezervate.</p>
+  </footer>
+</body>
+</html>
