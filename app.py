@@ -83,7 +83,7 @@ def volunteers():
 
 @app.route('/volunteers/new', methods=['GET', 'POST'])
 def new_volunteer():
-    if request.method == 'POST'):
+    if request.method == 'POST':
         try:
             title = request.form['title']
             description = request.form['description']
